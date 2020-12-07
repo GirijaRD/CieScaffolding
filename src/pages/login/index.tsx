@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { authenticate } from "../../features/login-flow";
 import { useHistory, useLocation } from "react-router-dom";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { setActiveScreen } from "../../features/current-screen";
+
 import {
   Button,
   CustomButton,
@@ -28,7 +28,7 @@ import Logo from "../../assets/images/logo.png";
 interface LoginProps {}
 interface DispatchProps {
   login: (obj: object) => void;
-  setActiveScreen1: () => void;
+ 
 }
 type Props = LoginProps & DispatchProps;
 // eslint-disable-next-line no-empty-pattern
@@ -45,8 +45,7 @@ function Login(props: Props): ReactElement {
     const password = passwordRef.current?.value;
     login({ username, password });
     // console.log("In the login:" + JSON.stringify(history));
-    setActiveScreen("www.google.com");
-    history.push("www.google.com");
+   
   }
   return (
     <LoginPageContainer>
@@ -112,9 +111,7 @@ function mapDispatchToProps(
     login: (obj: object) => {
       dispatch(authenticate(obj));
     },
-    setActiveScreen1: () => {
-      dispatch(setActiveScreen("www.google.com"));
-    },
+   
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
