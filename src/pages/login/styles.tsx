@@ -25,8 +25,7 @@ export const CustomButton = styled(Button)`
   font-size: 0.3rem;
 `;
 export const LoginPageContainer = styled(Row)`
-  height: 100vh;
-  /* /overflow: hidden; */
+  height: calc(var(--vh, 1vh) * 100);
 `;
 
 export const InfoDiv = styled(Col)`

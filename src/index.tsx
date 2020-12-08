@@ -2,20 +2,20 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import store from './redux-setup/store'
+import store from "./redux-setup/store";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import Login from "./pages/login";
 import { BrowserRouter, Route } from "react-router-dom";
-import PrivateRoute from './components/Routes/PrivateRoute';
+import PrivateRoute from "./components/Routes/PrivateRoute";
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <PrivateRoute path="/" component={<div>Home</div>}/>
-        <Route exact path ="/login">
-          <Login/>
-          </Route>
+        <PrivateRoute path="/" component={<div>Home</div>} exact />
+        <Route exact path="/login">
+          <Login />
+        </Route>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
