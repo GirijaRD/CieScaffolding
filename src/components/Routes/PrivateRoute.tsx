@@ -3,10 +3,10 @@ import React from 'react'
 import {connect} from 'react-redux'
 const PrivateRoute:React.FunctionComponent<any>=({component:Component,...rest})=>{
   const {token}=rest;
+  
   return (
     <Route {...rest} render={(props)=>{
       const combinedProps={...props,...rest};
-      console.log("token",token);
     return (token?<Component {...combinedProps}></Component>:<Redirect to="/login"/>);
     }}>
 

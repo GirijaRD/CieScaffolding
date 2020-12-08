@@ -1,5 +1,4 @@
 import { loggedInUser } from "./login-slice";
-console.log(loggedInUser.reducer)
 export const {
   loginStart,
   loginSuccess,

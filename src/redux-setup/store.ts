@@ -3,22 +3,17 @@ import {routerMiddleware} from 'connected-react-router';
 import rootReducer from './rootReducer'
 import history from './history';
 import thunk from "redux-thunk";
-import logger,{createLogger} from 'redux-logger';
+import {createLogger} from 'redux-logger';
 import tokenMiddleware from '../redux-middlewares-enhancers/token-middleware'
+import Logger from '../components/Logger'
 const Tlogger=createLogger({
     predicate:(getState ,action)=>
     {
-         console.log("predicate", getState());
-         console.log(action.constructor.name)
          return true
     },
-    level:(data)=>{
-        switch(data.type){
-            case "@@router/LOCATION_CHANGE":
-                return "info";
-            default:
-                return "log";
-        }
+    level:(data,...temp)=>{
+        console.log("level",data,temp);
+        return "info";
     },
     stateTransformer:(state)=>{
         switch(state.type){
@@ -47,11 +42,19 @@ const Tlogger=createLogger({
     collapsed:(getState,action)=>{
         console.log(action.type);
         return true;
+    },
+    logger:{
+        log:console.log,
+        info:console.info
     }
 }) 
+const LoggerMiddlwareCustom=(store: any)=>(next: any)=>(action: any)=>{
+    Logger.log({LogType:"ReduxAction",logData:action})
+    next(action);
+}
 const store=createStore(
     rootReducer,
-    applyMiddleware(routerMiddleware(history),thunk, tokenMiddleware ,Tlogger)
+    applyMiddleware(routerMiddleware(history),thunk , tokenMiddleware ,LoggerMiddlwareCustom,Tlogger)
 )
 
 export default store;
