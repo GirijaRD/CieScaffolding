@@ -10,7 +10,7 @@ const LoggerSlice=createSlice({
 })
 
 function Log(){
-        
+        console.log("Logger function store");
 }
 
 export default LoggerSlice;

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from '../interceptors/axiosConfig';
 import { BASE_URL,} from "../constants/app-config-constants";
 
 export async function login(loginReqObject: any) {

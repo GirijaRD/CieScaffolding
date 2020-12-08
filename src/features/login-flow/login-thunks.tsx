@@ -11,15 +11,13 @@ export const authenticate = (
   try {
     // dispatch(loginStart());
     const loggedInUserInfo = await login(loginReqObject);
-    console.log(loggedInUserInfo);
     if (loggedInUserInfo.type === "error") {
       dispatch(loginFailure(loggedInUserInfo.error));
     } else {
       dispatch(push("/home"));
-      //dispatch(loginSuccess(loggedInUserInfo));
+      dispatch(loginSuccess(loggedInUserInfo));
     }
   } catch (err) {
     // dispatch(loginFailure(err.toString()));
-    console.log("In the catch block" + err.toString());
   }
 };

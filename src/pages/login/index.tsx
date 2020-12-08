@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import React, { createRef, ReactElement, RefObject } from "react";
+import React, { createRef, ReactElement, RefObject, useContext } from "react";
 import { connect } from "react-redux";
 import { authenticate } from "../../features/login-flow";
 import { useHistory, useLocation } from "react-router-dom";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-
+import {Context } from '../../components/Logger';
 import {
   Button,
   CustomButton,
@@ -34,6 +34,7 @@ type Props = LoginProps & DispatchProps;
 
 function Login(props: Props): ReactElement {
   const history = useHistory();
+  const Logger=useContext(Context);
   let location = useLocation();
   const nameRef: RefObject<HTMLInputElement> = createRef();
   const passwordRef: RefObject<HTMLInputElement> = createRef();

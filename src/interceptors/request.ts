@@ -1,8 +1,16 @@
 
 import axios from "axios";
-
+import Logger from '../components/Logger'
 axios.interceptors.request.use(req => {
-  console.log(`${req.method} ${req.url}`);
-  // Important: request interceptors **must** return the request.
+  Logger.log({
+    LogType:"Network",
+    logData:{
+      type:"request",
+      data:{
+        ...req
+      }
+    }
+  });
+  
   return req;
 });
