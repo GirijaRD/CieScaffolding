@@ -36,8 +36,6 @@ type Props = LoginProps & DispatchProps;
 function Login(props: Props): ReactElement {
   const history = useHistory();
   const Logger=useContext(Context);
-  console.log(Logger);
-  Logger.log({LogType:"Error",logData:{type:"error"}})
   let location = useLocation();
   const nameRef: RefObject<HTMLInputElement> = createRef();
   const passwordRef: RefObject<HTMLInputElement> = createRef();
