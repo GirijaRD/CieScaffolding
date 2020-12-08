@@ -2,16 +2,16 @@ import axios from 'axios';
 import Logger from '../components/Logger'
 import store from '../redux-setup/store'
 axios.interceptors.request.use(req => {
-  // Logger.log({
-  //   LogType:"Network",
-  //   logData:{
-  //     type:"request",
-  //     data:{
-  //       ...req
-  //     }
-  //   }
-  // });
-  store.dispatch({type:"Logger/Log",payload:"store axios logger"});
+  Logger.log({
+    LogType:"Network",
+    logData:{
+      type:"request",
+      data:{
+        ...req
+      }
+    }
+  });
+  //store.dispatch({type:"Logger/Log",payload:"store axios logger"});
   return req;
 });
 

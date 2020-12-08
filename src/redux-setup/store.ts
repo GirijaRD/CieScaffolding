@@ -54,7 +54,7 @@ const LoggerMiddlwareCustom=(store: any)=>(next: any)=>(action: any)=>{
 }
 const store=createStore(
     rootReducer,
-    applyMiddleware(routerMiddleware(history),thunk , tokenMiddleware ,LoggerMiddlwareCustom,Tlogger)
+    applyMiddleware(routerMiddleware(history),thunk , tokenMiddleware ,LoggerMiddlwareCustom)
 )
 
 export default store;
