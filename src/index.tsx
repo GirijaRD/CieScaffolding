@@ -22,11 +22,13 @@ ReactDOM.render(
       <Router history={history}>
         <Logger>
           <Route exact path="/login">
-            <Login/>
+            <Login />
           </Route>
-          <PrivateRoute exact path="/consumer" component={Consumer}>
-            
-          </PrivateRoute>
+          <PrivateRoute
+            exact
+            path="/consumer"
+            component={Consumer}
+          ></PrivateRoute>
           <Route exact path="/competitor">
             {/* <Login /> */}
             <MainHeader />
