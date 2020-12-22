@@ -12,17 +12,25 @@ import { ConnectedRouter as Router } from "connected-react-router";
 import history from "./redux-setup/history";
 import PrivateRoute from "./components/Routes/PrivateRoute";
 import Logger from "./components/Logger";
-import Header from "./components/Header";
+import MainHeader from "./components/Header/MainHeader";
+import SubHeader from "components/Header/SubHeader";
+import Consumer from "pages/consumer";
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router history={history}>
         <Logger>
-          <Route exact path="/consumer">
-           <Header/>
+          <Route exact path="/login">
+            <Login/>
           </Route>
+          <PrivateRoute exact path="/consumer" component={Consumer}>
+            
+          </PrivateRoute>
           <Route exact path="/competitor">
-           <Header/>
+            {/* <Login /> */}
+            <MainHeader />
+            <SubHeader />
           </Route>
         </Logger>
       </Router>

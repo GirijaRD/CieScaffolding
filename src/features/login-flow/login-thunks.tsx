@@ -14,8 +14,8 @@ export const authenticate = (
     if (loggedInUserInfo.type === "error") {
       dispatch(loginFailure(loggedInUserInfo.error));
     } else {
-      dispatch(push("/home"));
       dispatch(loginSuccess(loggedInUserInfo));
+      dispatch(push("/consumer"));
     }
   } catch (err) {
     // dispatch(loginFailure(err.toString()));

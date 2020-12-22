@@ -11,7 +11,7 @@ function mapStateToProps({router:{location}}:any){
     }
 }
 
-const Header:React.FunctionComponent<HeaderProps>=({path}:HeaderProps):ReactElement=>{
+const Header=({path}:HeaderProps):ReactElement=>{
     const history = useHistory();
     function navigate(location:string){
         if("/"+location !== path )
