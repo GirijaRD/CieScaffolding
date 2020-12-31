@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Col, Dropdown, Row } from "react-bootstrap";
-
 export const CieHeader = styled.div`
 top: 0px;
 left: 0px;
@@ -9,7 +8,6 @@ height: 100px;
 background: #172039 0% 0% no-repeat padding-box;
 opacity: 1;
 `;
-​
 export const HeaderContainer = styled.div`
     width: 100%;
     padding-right: 35px;
@@ -18,10 +16,8 @@ export const HeaderContainer = styled.div`
     margin-left: auto;
     overflow: hidden;
 `;
-​
 export const UserDropdown = styled(Dropdown)`
 margin-top: 35px;
-//left: 1763px;
 width: 96px;
 height: 17px;
 letter-spacing: var(--unnamed-character-spacing-0);
@@ -44,7 +40,6 @@ position: inherit !important;
     border-color: red !important;
   }
 `
-​
 export const UserDropdownMenu = styled(Dropdown.Menu)`
 background: black !important;
 `
@@ -57,16 +52,13 @@ export const UserDropdownMenuOptions = styled(Dropdown.Item) `
 export const LogoutCustomTitle = styled(UserDropdownMenuOptions) `
 color: red !important;
 `
-​
 export const CustomDropdownToggle = styled(Dropdown.Toggle) `
  &:after {
      border-top: none !important
  } 
 `
-​
-​
 export const HeaderOptions = styled(Row) `
- float: right !important;
+float: right !important;
 margin-top : 2% !important;
 margin-right: 3% !important;
 `
@@ -81,11 +73,9 @@ color: ${props=>props.selected?"white":"darkgrey"};
 text-decoration:${props=>props.selected?"underline !important":"none"};
 text-decoration-color:"white";
 opacity: 1;
-
 white-space: nowrap !important;
 cursor: pointer;
 `
-​
 export const CustomTitle = styled(ConsumerInsightTitle)`
  margin-right: 0% !important;
 `;

@@ -39,9 +39,10 @@ const MainHeader: React.FunctionComponent<HeaderProps> = ({
         <Image src={Logo} style={{ marginLeft: "4rem" }} />
 
         <UserDropdown>
-          <CustomDropdownToggle id="dropdown-basic" />
-          Username
-          {/* </CustomDropdownToggle> */}
+          <CustomDropdownToggle id="dropdown-basic">
+            Username
+          </CustomDropdownToggle>
+
           <UserDropdownMenu>
             <UserDropdownMenuOptions onClick={navigate.bind(null, "admin")}>
               Admin

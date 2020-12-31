@@ -15,6 +15,7 @@ import Logger from "./components/Logger";
 import MainHeader from "./components/Header/MainHeader";
 import SubHeader from "components/Header/SubHeader";
 import Consumer from "pages/consumer";
+import Maps from "./components/Maps";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -29,10 +30,11 @@ ReactDOM.render(
             path="/consumer"
             component={Consumer}
           ></PrivateRoute>
-          <Route exact path="/competitor">
+          <Route exact path="/competitor" style={{ overflow: "hidden" }}>
             {/* <Login /> */}
             <MainHeader />
-            <SubHeader />
+            <SubHeader></SubHeader>
+            <Maps></Maps>
           </Route>
         </Logger>
       </Router>
