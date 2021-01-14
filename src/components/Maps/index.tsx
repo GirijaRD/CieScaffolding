@@ -35,7 +35,7 @@ const clusterStyles = [
   }
 ];
 const mapKey="AIzaSyD6Ao1lDJkpPNJs0P_l8ukCzbN-Yc4n_sU";// old key
-//const mapKey="AIzaSyCcJgnxmIIDvXuTib0RN1NTmyg-lSR3B18";// new key
+
 
 const MarketInfoComponent = ({markerInfo,clusterer,showAllInfo}:{
   markerInfo:{position:{lat:number,lng:number},content:string,icon?:string,name?:string}[],
