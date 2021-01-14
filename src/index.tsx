@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 
-import store from "./redux-setup/store";
+import storeConfig from "./redux-setup/store";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import Login from "./pages/login";
@@ -16,10 +16,12 @@ import MainHeader from "./components/Header/MainHeader";
 import SubHeader from "components/Header/SubHeader";
 import Consumer from "pages/consumer";
 import Maps from "./components/Maps";
+import { PersistGate } from "redux-persist/integration/react";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
+    <Provider store={storeConfig.store}>
+      <PersistGate loading={null} persistor={storeConfig.persistor}>
       <Router history={history}>
         <Logger>
           <Route exact path="/login">
@@ -38,6 +40,7 @@ ReactDOM.render(
           </Route>
         </Logger>
       </Router>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
 

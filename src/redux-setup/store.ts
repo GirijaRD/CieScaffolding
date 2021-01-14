@@ -6,6 +6,8 @@ import thunk from "redux-thunk";
 import {createLogger} from 'redux-logger';
 import tokenMiddleware from '../redux-middlewares-enhancers/token-middleware'
 import Logger from '../components/Logger'
+import {persistReducer, persistStore} from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 const Tlogger=createLogger({
     predicate:(getState ,action)=>
     {
@@ -52,9 +54,13 @@ const LoggerMiddlwareCustom=(store: any)=>(next: any)=>(action: any)=>{
     Logger.log({LogType:"ReduxAction",logData:action})
     next(action);
 }
+const persistConfig={
+    key:'root',
+    storage
+}
 const store=createStore(
-    rootReducer,
+    persistReducer(persistConfig,rootReducer),
     applyMiddleware(routerMiddleware(history),thunk , tokenMiddleware ,LoggerMiddlwareCustom)
 )
-
-export default store;
+const storeConfig={store,persistor:persistStore(store)}
+export default storeConfig;
