@@ -5,7 +5,11 @@ import { Spinner } from "react-bootstrap";
 import { Libraries } from "@react-google-maps/api/dist/utils/make-load-script-url";
 
 declare var google: any;
-
+const divStyle = {
+  background: 'white',
+  border: '1px solid #ccc',
+  padding: 15
+};
 const containerStyle = {
   width: "800px",
   height: "400px",
@@ -34,59 +38,10 @@ const clusterStyles = [
     width: 50
   }
 ];
-const mapKey="AIzaSyD6Ao1lDJkpPNJs0P_l8ukCzbN-Yc4n_sU";// old key
-//const mapKey="AIzaSyCcJgnxmIIDvXuTib0RN1NTmyg-lSR3B18";// new key
-
-const MarketInfoComponent = ({markerInfo,clusterer,showAllInfo}:{
-  markerInfo:{position:{lat:number,lng:number},content:string,icon?:string,name?:string}[],
-  clusterer?:any,
-  showAllInfo?:boolean,
-  
-}):ReactElement=>{
-  const [selectedMarker ,setSelectedMarker]=useState({index:null} as {index:number|null});
-  const closeInfo=()=>setSelectedMarker({index:null});
-  const onClickMarker=(index:number)=>setSelectedMarker({index});
-  const markers=markerInfo.map((marker,index)=>{
-    const showInfo = showAllInfo||selectedMarker.index ===index;
-    const {icon}= marker;
-    const content=marker.content?marker.content:marker.name;
-    
-    const markerProps={
-      position:marker.position,
-      ...(clusterer&&{clusterer:clusterer}),
-      ...(icon && {icon:{
-        url:icon,
-        scaledSize:new google.maps.Size(32,32),
-        origin: new google.maps.Point(0,0),
-        anchor: new google.maps.Point(0, 32)
-      }}),
-      
-    }
-    return (
-    <Marker 
-    {...markerProps}
-    onClick={onClickMarker.bind(null,index)}
-    key={index}
-    >
-      {showInfo && 
-      <InfoWindow
-        onCloseClick={closeInfo}
-        
-      >
-        <div style={{color:"black", background:"white"}}>
-          {content}
-        </div>
-      </InfoWindow>
-      }
-    </Marker>)
-  })
-  return(
-    <div>
-       {markers}
-    </div>
-  );
-}
+//libraries required for map to implement respective functionality
 const libraries:Libraries=["places","visualization"]
+
+// initial markers to populate on map
 const markerInfo=[
   {
     "position": {
@@ -409,8 +364,70 @@ const markerInfo=[
     "formatted_address": "Plot No 61 & 62 , Purshottam Nagar, Tatwadarsha Hospital, Road, opp. Kallur Petrol Bunk, Vidya Nagar, Hubli, Karnataka 580021, India"
   }
 ]
+
+const mapKey="AIzaSyD6Ao1lDJkpPNJs0P_l8ukCzbN-Yc4n_sU";// old key
+
+/**
+ * Creates marker with infowindows
+ * showAllInfo : will show all the info windows else only info windows of those clicked will show 
+ *  i.e one info window only 
+ * clusterer : this will map all markers to a clusterer if provided else wont cluster
+ * @param param0 
+ */
+const MarketInfoComponent = ({markerInfo,clusterer,showAllInfo}:{
+  markerInfo:{position:{lat:number,lng:number},content:string,icon?:string,name?:string}[],
+  clusterer?:any,
+  showAllInfo?:boolean,
+  
+}):ReactElement=>{
+  const [selectedMarker ,setSelectedMarker]=useState({index:null} as {index:number|null});
+  const closeInfo=()=>setSelectedMarker({index:null});
+  const onClickMarker=(index:number)=>setSelectedMarker({index}); 
+  const markers=markerInfo.map((marker,index)=>{
+    const showInfo = showAllInfo||selectedMarker.index ===index;//decides whether to show all infos or only on marker click
+    const {icon}= marker;
+    const content=marker.content?marker.content:marker.name;
+    
+    const markerProps={
+      position:marker.position,
+      ...(clusterer&&{clusterer:clusterer}),
+      ...(icon && {icon:{
+        url:icon,
+        scaledSize:new google.maps.Size(32,32),
+        origin: new google.maps.Point(0,0),
+        anchor: new google.maps.Point(0, 32)
+      }}),
+      
+    }
+    return (
+    <Marker 
+    {...markerProps}
+    onClick={onClickMarker.bind(null,index)}
+    key={index}
+    >
+      {showInfo && 
+      <InfoWindow
+        onCloseClick={closeInfo}
+        
+      >
+        <div style={{color:"black", background:"white"}}>
+          {content}
+        </div>
+      </InfoWindow>
+      }
+    </Marker>)
+  })
+  return(
+    <div>
+       {markers}
+    </div>
+  );
+}
+
+
+
 export  default function GoogleMapApi():ReactElement{
-  const[map,setMap]=useState(null as unknown as GoogleMap);
+  const[map,setMap]=useState(null as any);//map instance to get and set info on map instance 
   const [ markers,addMarker]=useState(markerInfo as any[]);
   const [SearchBox,setSearchBox]=useState({} as any)
   const {isLoaded} = useLoadScript({
@@ -418,16 +435,19 @@ export  default function GoogleMapApi():ReactElement{
     language:"hindi",
     libraries:libraries
   });
-  const onLoad=React.useCallback((map:GoogleMap)=>{
+  const onLoad=React.useCallback((map:any)=>{
     setMap(map);
   },[]);
   const searchBoxLoad=React.useCallback((searchBox)=>{
     setSearchBox(searchBox);
   },[])
-
+  /**
+   * Get all the places that match the query in searchBox on user selection
+   */
   const onPlacesChanged = ()=>{
     const places:any[]=SearchBox.getPlaces();
     const newMarkerState=[...markers];
+    const bounds=map.getBounds();
     places.forEach((place,index)=>{
       newMarkerState.push({
         position:{lat : place.geometry.location.lat(),lng: place.geometry.location.lng()},
@@ -437,17 +457,23 @@ export  default function GoogleMapApi():ReactElement{
         viewport:place.geometry.viewport,
         place_id:place.place_id,
         formatted_address:place.formatted_address
-      })
+      });
+      bounds.extend(place.geometry.location);
     });
-    
+   // map.fitBounds(bounds)
     addMarker(newMarkerState);
   }
-
+  // on click on the map will create a new marker
+  const addMarkerToMap=(e:any):void=>{
+    addMarker([...markers,{position:{lat:e.latLng.lat(),lng:e.latLng.lng()},content:"high traffic"}])
+    const bounds=map.getBounds();
+    markers.forEach(marker=>bounds.extend(new google.maps.LatLng(marker.position)));
+  }
   const getData=()=>{
     return markers.map(marker=>new google.maps.LatLng(marker.position))
   }
+
   const renderMap:Function=()=>{
-      
       return(
         <GoogleMap
         onLoad={onLoad}
@@ -456,21 +482,24 @@ export  default function GoogleMapApi():ReactElement{
         options={{minZoom:2,maxZoom:15}}
         mapContainerStyle={containerStyle}
         clickableIcons={true}
-        onClick={(e):void=>{
-          addMarker([...markers,{position:{lat:e.latLng.lat(),lng:e.latLng.lng()},content:"high traffic"}])
-        }}
+        onClick={addMarkerToMap}
         >
           <HeatmapLayer 
             data={getData()}
-            options={{radius:20}}
+            options={{radius:35}}
+            
           />
-
+      {// Clusters the markers
+      }
         <MarkerClusterer
         >
           {
-          (clusterer)=>(<MarketInfoComponent markerInfo={markers} clusterer={clusterer} showAllInfo/>)
+          (clusterer)=>(<MarketInfoComponent markerInfo={markers} clusterer={clusterer} />)
           }
         </MarkerClusterer>
+        {
+          // standalone searchBox with takes a input element and binds events to it
+        }
          <StandaloneSearchBox
          onLoad={searchBoxLoad}
          onPlacesChanged={onPlacesChanged}
@@ -504,7 +533,6 @@ export  default function GoogleMapApi():ReactElement{
           >
 
           </GroundOverlay>
-          
         </GoogleMap>
       )
   }
