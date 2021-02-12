@@ -366,7 +366,7 @@ const markerInfo=[
 ]
 
 const mapKey="AIzaSyD6Ao1lDJkpPNJs0P_l8ukCzbN-Yc4n_sU";// old key
-
+//const mapKey="AIzaSyCcJgnxmIIDvXuTib0RN1NTmyg-lSR3B18";// new key
 /**
  * Creates marker with infowindows
  * showAllInfo : will show all the info windows else only info windows of those clicked will show 

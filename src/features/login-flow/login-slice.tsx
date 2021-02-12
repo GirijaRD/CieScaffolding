@@ -28,8 +28,7 @@ function loadingSuccess(state: any, action: any) {
   state.error = null;
 }
 
-function resetLoginState(state: any, action: any) {
-  state.loggedInUser = loggedInUserInitialState.loggedInUser;
-  state.isLoading = false;
+function resetLoginState(state: any) {
+  state={...loggedInUserInitialState}
   state.error = null;
 }

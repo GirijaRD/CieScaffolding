@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { createRef, ReactElement, RefObject, useContext } from "react";
 import { connect } from "react-redux";
-import { authenticate } from "../../features/login-flow";
 import { useHistory, useLocation } from "react-router-dom";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { Context } from "../../components/Logger";
@@ -113,7 +112,10 @@ function mapDispatchToProps(
 ): DispatchProps {
   return {
     login: (obj: object) => {
-      dispatch(authenticate(obj));
+      dispatch({
+        type:"LOGIN",
+        payload:obj
+      });
     },
   };
 }

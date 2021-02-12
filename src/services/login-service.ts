@@ -7,7 +7,7 @@ export async function login(loginReqObject: any) {
         const { data } = await axios.post(url, loginReqObject);
         let userInfo = data;
         return userInfo;
-    } catch (err) {
+    } catch (err) { 
         throw err;
     }
 }

@@ -1,3 +1,3 @@
-//export const BASE_URL = "http://ec2-34-217-60-205.us-west-2.compute.amazonaws.com:8080";
-export const BASE_URL = "http://localhost:8080";
+export const BASE_URL = "https://cie-prod-elb-1478778521.us-west-2.elb.amazonaws.com";
+//export const BASE_URL = "http://localhost:8080";
 
