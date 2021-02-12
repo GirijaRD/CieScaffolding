@@ -45,13 +45,14 @@ function Login(props: Props): ReactElement {
   const history = useHistory();
   const Logger = useContext(Context);
   let location = useLocation();
-  const nameRef: RefObject<HTMLInputElement> = createRef();
+  let nameRef: RefObject<HTMLInputElement> = createRef();
   const passwordRef: RefObject<HTMLInputElement> = createRef();
   const { login } = props;
   function onClickHandler(e: React.MouseEvent<any, any>): void {
     e.preventDefault();
     const username = nameRef.current?.value;
     const password = passwordRef.current?.value;
+    console.log(nameRef.current?.value,nameRef.current?.nodeValue)
     login({ username, password });
     // console.log("In the login:" + JSON.stringify(history));
   }
@@ -95,12 +96,14 @@ function Login(props: Props): ReactElement {
                     size="small"
                     variant="outlined"
                     fullWidth
+                    inputRef={nameRef}
                   ></EmailTextBox>
                   <EmailTextBox
                     placeholder="Password"
                     size="small"
                     variant="outlined"
                     fullWidth
+                    inputRef={passwordRef}
                   ></EmailTextBox>
 
                   <ForgetPasswordParentLink>
@@ -109,7 +112,7 @@ function Login(props: Props): ReactElement {
                     </ForgetPasswordLink>
                   </ForgetPasswordParentLink>
                   <div>
-                    <LoginButton variant="contained" color="primary" fullWidth>
+                    <LoginButton variant="contained" color="primary" fullWidth onClick={onClickHandler}>
                       Login
                     </LoginButton>
                   </div>

@@ -12,7 +12,7 @@ function* authenticate({payload}:any){
     console.log("token",token)
     if(token){
       yield put(loginSuccess(token));
-      yield push("/consumer");
+      yield put(push("/consumer"));
     }
   }catch(e){
     yield put(loginFailure(e.toString()));
