@@ -1,5 +1,5 @@
 import React, { ReactElement, useState } from "react";
-import Logo from "./../../../assets/images/logo.png";
+import Logo from "./../../../assets/images/NewLogo.png";
 import { Image, Dropdown } from "react-bootstrap";
 import {
   CieHeader,

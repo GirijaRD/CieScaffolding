@@ -5,24 +5,34 @@ import { useHistory, useLocation } from "react-router-dom";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { Context } from "../../components/Logger";
 import {
-  Button,
-  CustomButton,
   LoginPageContainer,
-  LoginForm,
-  InfoDiv,
   CieTitle,
-  CieTitleName,
   CieSubParagraph,
-  CieFooter,
-  SignInTitle,
-  SignInSubPagragraph,
-  LoginFormPasswordLabel,
-  LoginPageTextBox,
-  ForgotPasswordLink,
+  LoginPageDiv,
+  CardDiv,
+  LoginSubForm,
+  SignInText,
+  LoginForm,
+  EmailTextBox,
+  ForgetPasswordLink,
+  ForgetPasswordParentLink,
+  LoginButton,
+  CreateNewUser,
+  TitleImage,
+  TitleImageDiv,
+  CieTitleParentDiv,
+  CieSubParagraphParentDiv,
+  AdaLogo,
+  LoginFormGrid,
+  MainGridContainer,
+  CreateNewUserParentDiv,
+  EnterMailText,
 } from "./styles";
 
-import { Form, Image } from "react-bootstrap";
-import Logo from "../../assets/images/logo.png";
+import Logo from "../../assets/images/image (6).png";
+import TitleImage1 from "../../assets/images/image (4).png";
+import Box from "@material-ui/core/Box";
+import Grid from "@material-ui/core/Grid";
 
 interface LoginProps {}
 interface DispatchProps {
@@ -46,62 +56,75 @@ function Login(props: Props): ReactElement {
     // console.log("In the login:" + JSON.stringify(history));
   }
   return (
-    <div className="container-fluid">
-      <LoginPageContainer>
-        <InfoDiv md={5}>
-          <div>
-            <Image
-              src={Logo}
-              style={{ marginLeft: "4rem", marginTop: "1rem" }}
-            />
-          </div>
-          <CieTitle>
-            <CieTitleName>Consumer Insight explorer</CieTitleName>
-            <CieSubParagraph>
-              Better understand customer segments in terms of their location,
-              demographics, wealth, life, stage, online and offline behavior
-            </CieSubParagraph>
-            <CieFooter>© 2020 ADA</CieFooter>
-          </CieTitle>
-        </InfoDiv>
+    <Box display="flex">
+      <LoginPageContainer container>
+        <LoginPageDiv>
+          <MainGridContainer container item lg={12} md={12}>
+            <Grid item lg={6} sm={6} md={6}>
+              <AdaLogo src={Logo}></AdaLogo>
+              <CardDiv>
+                <div>
+                  <TitleImageDiv>
+                    <TitleImage src={TitleImage1} component="img" />
+                  </TitleImageDiv>
+                  <div>
+                    <CieTitleParentDiv>
+                      <CieTitle>Consumer Insights Explorer </CieTitle>
+                    </CieTitleParentDiv>
 
-        <LoginForm md={7}>
-          <Form onSubmit={onClickHandler} style={{ width: "80%" }}>
-            <SignInTitle>Sign In</SignInTitle>
-            <SignInSubPagragraph>
-              Enter your credentials to get access
-            </SignInSubPagragraph>
+                    <CieSubParagraphParentDiv>
+                      <CieSubParagraph>
+                        Better understand customer segments in terms of their
+                        location, demographics, wealth, life, stage, online and
+                        offline behavior
+                      </CieSubParagraph>
+                    </CieSubParagraphParentDiv>
+                  </div>
+                </div>
+              </CardDiv>
+            </Grid>
 
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Username</Form.Label>
-              <LoginPageTextBox
-                type="text"
-                ref={nameRef}
-                placeholder="Username"
-              />
-            </Form.Group>
+            {/* Login form grid */}
+            <LoginFormGrid item lg={6} md={6} sm={6}>
+              <LoginSubForm item xs="auto">
+                <LoginForm>
+                  <SignInText variant="h4">Login</SignInText>
+                  <EnterMailText>Enter your Email and Password</EnterMailText>
+                  <EmailTextBox
+                    placeholder="Email"
+                    size="small"
+                    variant="outlined"
+                    fullWidth
+                  ></EmailTextBox>
+                  <EmailTextBox
+                    placeholder="Password"
+                    size="small"
+                    variant="outlined"
+                    fullWidth
+                  ></EmailTextBox>
 
-            <Form.Group controlId="formBasicPassword">
-              <LoginFormPasswordLabel>
-                Password:
-                <ForgotPasswordLink href="www.google.com">
-                  Click here
-                </ForgotPasswordLink>
-                <LoginPageTextBox
-                  type="password"
-                  placeholder="password"
-                  ref={passwordRef}
-                />
-              </LoginFormPasswordLabel>
-            </Form.Group>
-
-            <Button buttonColor={"#fdb934"} type="submit">
-              Login
-            </Button>
-          </Form>
-        </LoginForm>
+                  <ForgetPasswordParentLink>
+                    <ForgetPasswordLink to="/home">
+                      Forget Password?
+                    </ForgetPasswordLink>
+                  </ForgetPasswordParentLink>
+                  <div>
+                    <LoginButton variant="contained" color="primary" fullWidth>
+                      Login
+                    </LoginButton>
+                  </div>
+                  <CreateNewUserParentDiv>
+                    <CreateNewUser to="/home">
+                      New User? Create an account now
+                    </CreateNewUser>
+                  </CreateNewUserParentDiv>
+                </LoginForm>
+              </LoginSubForm>
+            </LoginFormGrid>
+          </MainGridContainer>
+        </LoginPageDiv>
       </LoginPageContainer>
-    </div>
+    </Box>
   );
 }
 function mapStateToProps(): LoginProps {
