@@ -17,29 +17,33 @@ import SubHeader from "components/Header/SubHeader";
 import Consumer from "pages/consumer";
 import Maps from "./components/Maps";
 import { PersistGate } from "redux-persist/integration/react";
+import SignUp from "./pages/signup";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={storeConfig.store}>
       <PersistGate loading={null} persistor={storeConfig.persistor}>
-      <Router history={history}>
-        <Logger>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <PrivateRoute
-            exact
-            path="/consumer"
-            component={Consumer}
-          ></PrivateRoute>
-          <Route exact path="/competitor" style={{ overflow: "hidden" }}>
-            {/* <Login /> */}
-            <MainHeader />
-            <SubHeader></SubHeader>
-            <Maps></Maps>
-          </Route>
-        </Logger>
-      </Router>
+        <Router history={history}>
+          <Logger>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            <Route exact path="/signup">
+              <SignUp />
+            </Route>
+            <PrivateRoute
+              exact
+              path="/consumer"
+              component={Consumer}
+            ></PrivateRoute>
+            <Route exact path="/competitor" style={{ overflow: "hidden" }}>
+              {/* <Login /> */}
+              <MainHeader />
+              <SubHeader></SubHeader>
+              <Maps></Maps>
+            </Route>
+          </Logger>
+        </Router>
       </PersistGate>
     </Provider>
   </React.StrictMode>,

@@ -53,7 +53,7 @@ opacity: 1;
 display: flex !important;
 align-items: center !important;
 justify-content: center !important;
-height: 90% !important
+height: 90% !important;
 `;
 
 export const AdaLogo = styled.img `

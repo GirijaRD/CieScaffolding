@@ -52,7 +52,7 @@ function Login(props: Props): ReactElement {
     e.preventDefault();
     const username = nameRef.current?.value;
     const password = passwordRef.current?.value;
-    console.log(nameRef.current?.value,nameRef.current?.nodeValue)
+    console.log(nameRef.current?.value, nameRef.current?.nodeValue);
     login({ username, password });
     // console.log("In the login:" + JSON.stringify(history));
   }
@@ -112,7 +112,12 @@ function Login(props: Props): ReactElement {
                     </ForgetPasswordLink>
                   </ForgetPasswordParentLink>
                   <div>
-                    <LoginButton variant="contained" color="primary" fullWidth onClick={onClickHandler}>
+                    <LoginButton
+                      variant="contained"
+                      color="primary"
+                      fullWidth
+                      onClick={onClickHandler}
+                    >
                       Login
                     </LoginButton>
                   </div>
@@ -139,8 +144,8 @@ function mapDispatchToProps(
   return {
     login: (obj: object) => {
       dispatch({
-        type:"LOGIN",
-        payload:obj
+        type: "LOGIN",
+        payload: obj,
       });
     },
   };
