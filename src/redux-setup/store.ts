@@ -2,14 +2,12 @@ import {createStore,applyMiddleware} from '@reduxjs/toolkit';
 import {routerMiddleware} from 'connected-react-router';
 import rootReducer from './rootReducer'
 import history from './history';
-import thunk from "redux-thunk";
 //import {createLogger} from 'redux-logger';
 import tokenMiddleware from '../redux-middlewares-enhancers/token-middleware'
 import Logger from '../components/Logger'
 import {persistReducer, persistStore} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import createSagaMiddleware from 'redux-saga';
-import loginSaga from '../features/login-flow/login-sagas'
 import LoginSaga from '../features/login-flow/login-sagas';
 // const Tlogger=createLogger({
 //     predicate:(getState ,action)=>
@@ -54,7 +52,7 @@ import LoginSaga from '../features/login-flow/login-sagas';
 //     }
 // }) 
 const sagaMiddleware  = createSagaMiddleware();
-const LoggerMiddlwareCustom=(store: any)=>(next: any)=>(action: any)=>{
+const LoggerMiddlwareCustom=()=>(next: any)=>(action: any)=>{
     Logger.log({LogType:"ReduxAction",logData:action})
     next(action);
 }

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import Logger from '../components/Logger'
-import store from '../redux-setup/store'
 axios.interceptors.request.use(req => {
   Logger.log({
     LogType:"Network",

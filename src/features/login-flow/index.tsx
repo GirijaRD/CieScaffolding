@@ -4,7 +4,8 @@ export const {
   loginStart,
   loginSuccess,
   loginFailure,
-  resetLoginState,
+  logout,
+  login,
 } = loggedInUser.actions;
 
 export default loggedInUser.reducer;

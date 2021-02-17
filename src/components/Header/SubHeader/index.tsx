@@ -2,10 +2,6 @@ import React, { ReactElement, useState } from "react";
 import {
   Row,
   Col,
-  Dropdown,
-  OverlayTrigger,
-  Tooltip,
-  Button,
 } from "react-bootstrap";
 import {
   CieSubHeader,
@@ -21,17 +17,8 @@ import {
   InformationReachDropdownContentDiv,
 } from "./style";
 import { Popover } from "react-tiny-popover";
-import SubHeaderMenuOptions from "../SubHeaderMenuOptions/index";
-import Facebook from "../../../assets/images/Facebook.png";
-import Audience from "../../../assets/images/Audience.png";
-import Youtube from "../../../assets/images/Youtube.png";
-interface Props {}
-export default function SubHeader({}: Props): ReactElement {
-  const [hover, setHover] = useState(false);
+export default function SubHeader(): ReactElement {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-  const updateHover = () => {
-    setHover(!hover);
-  };
 
   return (
     <Row>

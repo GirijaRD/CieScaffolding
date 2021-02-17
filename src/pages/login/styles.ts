@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { Row, Col, FormLabel, FormGroup, Image } from "react-bootstrap";
+import { Col, FormLabel, FormGroup } from "react-bootstrap";
 
-import CoverImage from "../../assets/images/cover_image.png";
 
 import Typography from "@material-ui/core/Typography";
 import FormControl from "@material-ui/core/FormControl"

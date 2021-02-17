@@ -18,6 +18,7 @@ class Logger extends React.Component<any,{}>{
     }
     static writeToServer=async(config: any)=>{
         try{
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const response = await axios(config);
         }catch(e){
             return {error:e.message};
