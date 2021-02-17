@@ -1,6 +1,6 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement } from "react";
 import Logo from "./../../../assets/images/NewLogo.png";
-import { Image, Dropdown } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import {
   CieHeader,
   HeaderContainer,
@@ -12,12 +12,13 @@ import {
   UserDropdownMenuOptions,
   CustomDropdownToggle,
 } from "./styles";
-
+import {logout} from '../../../features/login-flow'
 import { connect } from "react-redux";
 
 import { useHistory } from "react-router";
 interface HeaderProps {
-  path: string;
+  path: string,
+  Logout: ()=>any,
 }
 
 function mapStateToProps({ router: { location } }: any) {
@@ -28,11 +29,13 @@ function mapStateToProps({ router: { location } }: any) {
 
 const MainHeader: React.FunctionComponent<HeaderProps> = ({
   path,
+  Logout
 }: HeaderProps): ReactElement => {
   const history = useHistory();
   function navigate(location: string) {
     if ("/" + location !== path) history.push(location);
   }
+  
   return (
     <HeaderContainer>
       <CieHeader>
@@ -50,7 +53,7 @@ const MainHeader: React.FunctionComponent<HeaderProps> = ({
             <UserDropdownMenuOptions href="#/action-2">
               Help
             </UserDropdownMenuOptions>
-            <LogoutCustomTitle href="#/action-3">LogOut</LogoutCustomTitle>
+            <LogoutCustomTitle onClick={Logout}>LogOut</LogoutCustomTitle>
           </UserDropdownMenu>
         </UserDropdown>
         <HeaderOptions>
@@ -77,5 +80,10 @@ const MainHeader: React.FunctionComponent<HeaderProps> = ({
     </HeaderContainer>
   );
 };
+function mapDispatchToProps(dispatch:any){
+  return {
+    Logout:()=>{dispatch(logout())},
 
-export default connect(mapStateToProps)(MainHeader);
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(MainHeader);

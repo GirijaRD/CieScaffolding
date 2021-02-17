@@ -5,11 +5,6 @@ import { Spinner } from "react-bootstrap";
 import { Libraries } from "@react-google-maps/api/dist/utils/make-load-script-url";
 
 declare var google: any;
-const divStyle = {
-  background: 'white',
-  border: '1px solid #ccc',
-  padding: 15
-};
 const containerStyle = {
   width: "800px",
   height: "400px",
@@ -18,6 +13,7 @@ const centerInit = {
   lat: 15.3812992,
   lng: 75.1173632,
 };
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const clusterStyles = [
   {
     textColor: 'white',

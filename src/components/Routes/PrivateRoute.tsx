@@ -26,4 +26,4 @@ function mapStateToProps({ login }: any) {
     token: login.loggedInUser.token,
   };
 }
-export default connect(mapStateToProps)(PrivateRoute);
+export default connect(mapStateToProps,null,null,{pure:false})(PrivateRoute);

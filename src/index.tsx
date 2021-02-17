@@ -1,23 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
 
 import storeConfig from "./redux-setup/store";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import Login from "./pages/login";
-import { BrowserRouter, Route } from "react-router-dom";
+import { Redirect, Switch } from "react-router-dom";
 import { ConnectedRouter as Router } from "connected-react-router";
 import history from "./redux-setup/history";
 import PrivateRoute from "./components/Routes/PrivateRoute";
 import Logger from "./components/Logger";
-import MainHeader from "./components/Header/MainHeader";
-import SubHeader from "components/Header/SubHeader";
 import Consumer from "pages/consumer";
-import Maps from "./components/Maps";
 import { PersistGate } from "redux-persist/integration/react";
 import SignUp from "./pages/signup";
+import PublicRoute from "components/Routes/PublicRoute";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -25,23 +22,17 @@ ReactDOM.render(
       <PersistGate loading={null} persistor={storeConfig.persistor}>
         <Router history={history}>
           <Logger>
-            <Route exact path="/login">
-              <Login />
-            </Route>
-            <Route exact path="/signup">
-              <SignUp />
-            </Route>
-            <PrivateRoute
-              exact
-              path="/consumer"
-              component={Consumer}
-            ></PrivateRoute>
-            <Route exact path="/competitor" style={{ overflow: "hidden" }}>
-              {/* <Login /> */}
-              <MainHeader />
-              <SubHeader></SubHeader>
-              <Maps></Maps>
-            </Route>
+            <Switch>
+              <PublicRoute exact path="/login" component={Login} />
+              <PrivateRoute
+                exact
+                path="/signup"
+                component={SignUp}
+              ></PrivateRoute>
+              <PrivateRoute exact path="/consumer" component={Consumer} />
+              <PrivateRoute exact path="/competitor" component={Consumer} />
+              <Redirect from="/*" to={"/login"} />
+            </Switch>
           </Logger>
         </Router>
       </PersistGate>

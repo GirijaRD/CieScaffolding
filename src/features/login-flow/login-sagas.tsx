@@ -1,37 +1,28 @@
 //import { loginStart, loginSuccess, loginFailure } from "../login-flow";
-import { loginStart, loginFailure, loginSuccess, resetLoginState } from ".";
-import { login } from "../../services/login-service";
+import { loginStart, loginFailure, loginSuccess, logout } from ".";
+import { authService } from "../../services/login-service";
 import { push } from "connected-react-router";
 import {all , cancelled, put, takeLatest} from 'redux-saga/effects'
 function* authenticate({payload}:any){
   try{
-    console.log(`payload ${JSON.stringify(payload)}`);
-    console.log(loginStart(),loginSuccess(""));
     yield put(loginStart());
-    const token = yield login(payload);
+    const token = yield authService(payload);
     console.log("token",token)
     if(token){
       yield put(loginSuccess(token));
       yield put(push("/consumer"));
     }
   }catch(e){
+    console.log("login error",e)
     yield put(loginFailure(e.toString()));
-    yield put(resetLoginState())
+    yield put(logout())
   }finally{
     if(yield cancelled())
       console.log("authentication cancelled");
   }
 }
-function* Logout(){
-  try{
-    yield put(resetLoginState());
-  }catch(e){
-
-  }
-}
 export default function * LoginSaga(){
   yield all([
     takeLatest("LOGIN",authenticate),
-    takeLatest("LOGOUT",Logout)
   ])
 }
