@@ -44,8 +44,10 @@ export default function SignUpFormComponent() {
     if (validationName === "name") {
       if (NameValidation(validationValue)) {
         setErrors({ ...errors, name: "Name Should be atleast 4 letters" });
+        return false;
       } else {
         setErrors({ ...errors, name: "" });
+        return true;
       }
     }
 
@@ -53,8 +55,10 @@ export default function SignUpFormComponent() {
     if (validationName === "email") {
       if (!EmailValidation(validationValue)) {
         setErrors({ ...errors, email: "Invalid Email" });
+        return false;
       } else {
         setErrors({ ...errors, email: "" });
+        return true;
       }
     }
 
@@ -65,8 +69,10 @@ export default function SignUpFormComponent() {
           ...errors,
           password: "password should be atleast 6 char long",
         });
+        return false;
       } else {
         setErrors({ ...errors, password: "" });
+        return true;
       }
     }
 
@@ -74,8 +80,10 @@ export default function SignUpFormComponent() {
     if (validationName === "repassword") {
       if (validationValue !== data.password) {
         setErrors({ ...errors, repassword: "Password doesn't Match" });
+        return false;
       } else {
         setErrors({ ...errors, repassword: "" });
+        return true;
       }
     }
   };

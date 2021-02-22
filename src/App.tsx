@@ -8,6 +8,7 @@ import Logger from "./components/Logger";
 import Consumer from "pages/consumer";
 import SignUp from "./pages/signup";
 import PublicRoute from "components/Routes/PublicRoute";
+
 import "./App.css";
 
 function App() {

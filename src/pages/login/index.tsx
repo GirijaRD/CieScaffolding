@@ -1,15 +1,8 @@
 import React, { ReactElement } from "react";
 import { connect } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import {
-  LoginFormGrid,
-  MainContainer,
-  IntroContainer,
-  MainGrid,
-  IntroGridView,
-} from "../../components/Common/styles";
 import LoginForm from "../../components/LoginForm";
-import IntroTextComponent from "components/IntroTextComponent";
+import AuthWrapper from "components/AuthWrapper";
 
 interface LoginProps {}
 interface DispatchProps {
@@ -22,18 +15,21 @@ function Login(props: Props): ReactElement {
   const { login } = props;
 
   return (
-    <MainContainer>
-      <IntroContainer>
-        <MainGrid container>
-          <IntroGridView item lg={6} sm={12} md={6}>
-            <IntroTextComponent />
-          </IntroGridView>
-          <LoginFormGrid item lg={6} sm={12} md={6}>
-            <LoginForm login={login} />
-          </LoginFormGrid>
-        </MainGrid>
-      </IntroContainer>
-    </MainContainer>
+    <AuthWrapper>
+      <LoginForm login={login} />
+    </AuthWrapper>
+    // <MainContainer>
+    //   <IntroContainer>
+    //     <MainGrid container>
+    //       <IntroGridView item lg={6} sm={12} md={6}>
+    //         <IntroTextComponent />
+    //       </IntroGridView>
+    //       <LoginFormGrid item lg={6} sm={12} md={6}>
+    //         <LoginForm login={login} />
+    //       </LoginFormGrid>
+    //     </MainGrid>
+    //   </IntroContainer>
+    // </MainContainer>
   );
 }
 function mapStateToProps(): LoginProps {
