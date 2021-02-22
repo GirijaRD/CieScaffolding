@@ -1,4 +1,4 @@
-import { Box } from "@material-ui/core";
+import { Box, InputAdornment } from "@material-ui/core";
 import React, { RefObject, createRef, ReactElement } from "react";
 import {
   LoginSubForm,
@@ -11,6 +11,8 @@ import { EmailValidation } from "../helperMethods/validations";
 import InputTextField from "components/InputTextField";
 import FormButton from "components/FormButton";
 import CieAuthLink from "components/CieAuthLink";
+import EmailIcon from "components/Icons/AuthIcons/EmailIcon";
+import PasswordIcon from "components/Icons/AuthIcons/PasswordIcon";
 
 interface Props {
   login: (obj: object) => void;
@@ -70,6 +72,13 @@ function LoginForm(props: Props): ReactElement {
             fullWidth
             onBlur={handleValidations}
             inputRef={nameRef}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <EmailIcon />
+                </InputAdornment>
+              ),
+            }}
           ></InputTextField>
           <InputTextField
             placeholder="Password"
@@ -78,6 +87,13 @@ function LoginForm(props: Props): ReactElement {
             variant="outlined"
             fullWidth
             inputRef={passwordRef}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PasswordIcon />
+                </InputAdornment>
+              ),
+            }}
           ></InputTextField>
           <CieAuthLink
             title="Forgot Password?"

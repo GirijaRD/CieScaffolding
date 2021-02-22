@@ -12,18 +12,6 @@ function SignUp(props: Props): ReactElement {
     <AuthWrapper>
       <SignUpFormComponent />
     </AuthWrapper>
-    // <MainContainer>
-    //   <IntroContainer>
-    //     <MainGrid container>
-    //       <IntroGridView item lg={6} sm={12} md={6}>
-    //         <IntroTextComponent />
-    //       </IntroGridView>
-    //       <LoginFormGrid item lg={6} sm={12} md={6}>
-    //         <SignUpFormComponent />
-    //       </LoginFormGrid>
-    //     </MainGrid>
-    //   </IntroContainer>
-    // </MainContainer>
   );
 }
 export default connect()(SignUp);

@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from "react";
-import { Box } from "@material-ui/core";
+import { Box, InputAdornment } from "@material-ui/core";
 import {
   LoginSubForm,
   SignInText,
@@ -11,7 +11,9 @@ import InputTextField from "components/InputTextField";
 import { EmailValidation, NameValidation } from "../helperMethods/validations";
 import FormButton from "components/FormButton";
 import CieAuthLink from "components/CieAuthLink";
-
+import EmailIcon from "components/Icons/AuthIcons/EmailIcon";
+import PasswordIcon from "components/Icons/AuthIcons/PasswordIcon";
+import UserIcon from "components/Icons/AuthIcons/UserIcon";
 const useStyles = makeStyles({
   root: {
     "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
@@ -118,13 +120,13 @@ export default function SignUpFormComponent() {
             error={errors.name !== "" ? true : false}
             helperText={errors.name}
             onChange={handleChange}
-            //           // InputProps={{
-            //           //   startAdornment: (
-            //           //     <InputAdornment position="start">
-            //           //       <AccountCircle />
-            //           //     </InputAdornment>
-            //   ),
-            //}}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <UserIcon />
+                </InputAdornment>
+              ),
+            }}
             className={classes.root}
           />
           <InputTextField
@@ -138,6 +140,13 @@ export default function SignUpFormComponent() {
             fullWidth
             onChange={handleChange}
             className={classes.root}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <EmailIcon />
+                </InputAdornment>
+              ),
+            }}
           />
           <InputTextField
             placeholder="Set Password"
@@ -150,6 +159,13 @@ export default function SignUpFormComponent() {
             fullWidth
             onChange={handleChange}
             className={classes.root}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PasswordIcon />
+                </InputAdornment>
+              ),
+            }}
           />
           <InputTextField
             placeholder="Password"
@@ -161,6 +177,13 @@ export default function SignUpFormComponent() {
             type="password"
             fullWidth
             onChange={handleChange}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PasswordIcon />
+                </InputAdornment>
+              ),
+            }}
             className={classes.root}
           />
           <FormButton
