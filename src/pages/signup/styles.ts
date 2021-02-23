@@ -33,6 +33,7 @@ height : 90vh !important;
 
 export const AdaLogo = styled.img `
 margin-left: 2rem !important;
+  
 `;
 
 export const CardImageDiv = styled.div `

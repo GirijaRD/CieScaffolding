@@ -27,7 +27,7 @@ import {
   EnterMailText,
 } from "./styles";
 
-import Logo from "../../assets/images/image (6).png";
+import Logo from "../../assets/images/NewLogo.png";
 import TitleImage1 from "../../assets/images/image (4).png";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";

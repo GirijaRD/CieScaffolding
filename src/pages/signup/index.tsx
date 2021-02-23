@@ -25,7 +25,7 @@ import {
   ExistingUser,
 } from "./styles";
 import { Grid } from "@material-ui/core";
-import Logo from "../../assets/images/image (6).png";
+import Logo from "../../assets/images/NewLogo.png";
 import TitleImage1 from "../../assets/images/image (4).png";
 import EmailIcon from "../../assets/images/Email.png";
 import InputAdornment from "@material-ui/core/InputAdornment";

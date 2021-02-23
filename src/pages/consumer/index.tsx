@@ -1,13 +1,13 @@
 import React, { ReactElement } from "react";
-import MainHeader from "../../components/Header/MainHeader";
-import SubHeader from "../../components/Header/SubHeader";
+import Header from "../../components/Header";
+//import SubHeader from "../../components/Header/SubHeader";
 
 import Maps from "components/Maps";
 const Consumer: React.FunctionComponent<{}> = (props: {}): ReactElement => {
   return (
-    <div>
-      <MainHeader />
-      <SubHeader></SubHeader>
+    <div style={{ minWidth: "fit-content" }}>
+      <Header />
+
       <Maps></Maps>
     </div>
   );
