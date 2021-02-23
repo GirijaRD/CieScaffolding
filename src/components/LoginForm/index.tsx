@@ -5,12 +5,12 @@ import {
   SignInText,
   EnterMailText,
   TextDetails,
-} from "../Common/formstyles";
+} from "../FormStyles/formstyles";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { EmailValidation } from "../helperMethods/validations";
 import InputTextField from "components/InputTextField";
 import FormButton from "components/FormButton";
-import CieAuthLink from "components/CieAuthLink";
+import AuthLink from "components/AuthLink";
 import EmailIcon from "components/Icons/AuthIcons/EmailIcon";
 import PasswordIcon from "components/Icons/AuthIcons/PasswordIcon";
 
@@ -31,6 +31,7 @@ function LoginForm(props: Props): ReactElement {
   const passwordRef: RefObject<HTMLInputElement> = createRef();
   const classes = useStyles();
   const [errorUserName, setErrorUserName] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
 
   const { login } = props;
 
@@ -40,7 +41,9 @@ function LoginForm(props: Props): ReactElement {
     const password = passwordRef.current?.value;
     console.log(nameRef.current?.value, nameRef.current?.nodeValue);
     console.log(username, password);
+    setLoading(true);
     login({ username, password });
+    setLoading(false);
     // console.log("In the login:" + JSON.stringify(history));
   }
 
@@ -71,6 +74,7 @@ function LoginForm(props: Props): ReactElement {
             helperText={errorUserName}
             fullWidth
             onBlur={handleValidations}
+            disabled={loading}
             inputRef={nameRef}
             InputProps={{
               startAdornment: (
@@ -86,6 +90,7 @@ function LoginForm(props: Props): ReactElement {
             size="small"
             variant="outlined"
             fullWidth
+            disabled={loading}
             inputRef={passwordRef}
             InputProps={{
               startAdornment: (
@@ -95,7 +100,7 @@ function LoginForm(props: Props): ReactElement {
               ),
             }}
           ></InputTextField>
-          <CieAuthLink
+          <AuthLink
             title="Forgot Password?"
             to="/home"
             style={{ float: "right", margin: "10px 0px" }}
@@ -106,9 +111,10 @@ function LoginForm(props: Props): ReactElement {
             color="primary"
             fullWidth
             onClick={onClickHandler}
+            loading={loading}
           />
           <div style={{ marginTop: "20px" }}>
-            <CieAuthLink to="/signup" title="New User? Create an account now" />
+            <AuthLink to="/signup" title="New User? Create an account now" />
           </div>
         </form>
       </Box>

@@ -12,7 +12,7 @@ type Props = LoginProps & DispatchProps;
 
 function Login(props: Props): ReactElement {
   const { login } = props;
-
+  // alert toast are required
   return (
     <AuthWrapper>
       <LoginForm login={login} />

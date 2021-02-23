@@ -5,7 +5,7 @@ import {
   IntroContainer,
   MainGrid,
   IntroGridView,
-} from "../Common/styles";
+} from "./styles";
 import IntroTextComponent from "components/IntroTextComponent";
 
 interface props {

@@ -5,15 +5,16 @@ import {
   SignInText,
   EnterMailText,
   TextDetails,
-} from "../Common/formstyles";
+} from "../FormStyles/formstyles";
 import { makeStyles } from "@material-ui/core/styles";
 import InputTextField from "components/InputTextField";
 import { EmailValidation, NameValidation } from "../helperMethods/validations";
 import FormButton from "components/FormButton";
-import CieAuthLink from "components/CieAuthLink";
+import AuthLink from "components/AuthLink";
 import EmailIcon from "components/Icons/AuthIcons/EmailIcon";
 import PasswordIcon from "components/Icons/AuthIcons/PasswordIcon";
 import UserIcon from "components/Icons/AuthIcons/UserIcon";
+
 const useStyles = makeStyles({
   root: {
     "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
@@ -41,12 +42,11 @@ export default function SignUpFormComponent() {
   const validateData = (
     validationName: string,
     validationValue: string
-  ): any => {
+  ): boolean => {
     //name validation
     if (validationName === "name") {
       if (NameValidation(validationValue)) {
         setErrors({ ...errors, name: "Name Should be atleast 4 letters" });
-        return false;
       } else {
         setErrors({ ...errors, name: "" });
         return true;
@@ -57,7 +57,6 @@ export default function SignUpFormComponent() {
     if (validationName === "email") {
       if (!EmailValidation(validationValue)) {
         setErrors({ ...errors, email: "Invalid Email" });
-        return false;
       } else {
         setErrors({ ...errors, email: "" });
         return true;
@@ -71,7 +70,6 @@ export default function SignUpFormComponent() {
           ...errors,
           password: "password should be atleast 6 char long",
         });
-        return false;
       } else {
         setErrors({ ...errors, password: "" });
         return true;
@@ -82,12 +80,12 @@ export default function SignUpFormComponent() {
     if (validationName === "repassword") {
       if (validationValue !== data.password) {
         setErrors({ ...errors, repassword: "Password doesn't Match" });
-        return false;
       } else {
         setErrors({ ...errors, repassword: "" });
         return true;
       }
     }
+    return false;
   };
 
   React.useEffect(() => {
@@ -191,9 +189,10 @@ export default function SignUpFormComponent() {
             variant="contained"
             color="primary"
             fullWidth
+            loading={false}
           />
           <div style={{ marginTop: "20px" }}>
-            <CieAuthLink
+            <AuthLink
               to="/login"
               title=" Already have an account? Click here to Log In!"
             />
