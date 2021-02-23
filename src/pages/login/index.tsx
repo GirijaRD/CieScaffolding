@@ -2,6 +2,7 @@
 import React, { createRef, ReactElement, RefObject } from "react";
 import { connect } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
+
 import {
   LoginPageContainer,
   CieTitle,
@@ -27,7 +28,7 @@ import {
   EnterMailText,
 } from "./styles";
 
-import Logo from "../../assets/images/image (6).png";
+import Logo from "../../assets/images/NewLogo.png";
 import TitleImage1 from "../../assets/images/image (4).png";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
@@ -47,7 +48,7 @@ function Login(props: Props): ReactElement {
     e.preventDefault();
     const username = nameRef.current?.value;
     const password = passwordRef.current?.value;
-    console.log(nameRef.current?.value, nameRef.current?.nodeValue);
+    console.log(nameRef.current?.value,nameRef.current?.nodeValue)
     login({ username, password });
     // console.log("In the login:" + JSON.stringify(history));
   }
@@ -107,12 +108,7 @@ function Login(props: Props): ReactElement {
                     </ForgetPasswordLink>
                   </ForgetPasswordParentLink>
                   <div>
-                    <LoginButton
-                      variant="contained"
-                      color="primary"
-                      fullWidth
-                      onClick={onClickHandler}
-                    >
+                    <LoginButton variant="contained" color="primary" fullWidth onClick={onClickHandler}>
                       Login
                     </LoginButton>
                   </div>
@@ -130,17 +126,19 @@ function Login(props: Props): ReactElement {
     </Box>
   );
 }
+//useSelector hooks
 function mapStateToProps(): LoginProps {
   return {};
 }
+//useDispatch
 function mapDispatchToProps(
   dispatch: ThunkDispatch<{}, {}, any>
 ): DispatchProps {
   return {
     login: (obj: object) => {
       dispatch({
-        type: "LOGIN",
-        payload: obj,
+        type:"LOGIN",
+        payload:obj
       });
     },
   };
