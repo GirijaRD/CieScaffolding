@@ -172,7 +172,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
                   horizontal: "left",
                 }}
               >
-                <MenuItem onClick={handleClose} divider>
+                <MenuItem onClick={navigate.bind(null, "admin")} divider>
                   <AdminIcon
                     style={{
                       width: "19px",
@@ -193,7 +193,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
 
                   <HeaderDropdownOptions>Help</HeaderDropdownOptions>
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={Logout}>
                   <LogoutIcon
                     style={{
                       width: "19px",
