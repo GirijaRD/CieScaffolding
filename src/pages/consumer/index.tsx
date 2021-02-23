@@ -5,10 +5,10 @@ import {Divider} from '@material-ui/core'
 import Maps from "components/Maps";
 const Consumer: React.FunctionComponent<{}> = (props: {}): ReactElement => {
   return (
-    <div style={{ minWidth: "fit-content" }}>
+    <div style={{width:"100vw"}}>
       <Header />
       <SubHeader/>
-      <Divider/>
+      <Divider style={{margin:"5px 1px 15px"}}/>
       <Maps></Maps>
     </div>
   );

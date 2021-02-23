@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     },
     collapseContainer: {
       borderRadius: "26px",
-      height: "fit-content",
+      
       transition: ".1s ease-in",
       padding: "0px",
       width: "max-content",
@@ -35,10 +35,7 @@ const useStyles = makeStyles({
     paperCollapsed:{
         borderRadius: "26px",
         width: "max-content",
-        height:"2.1rem",
         backgroundColor:"#C8D4FF" ,
-        overflow:"hidden",
-        transitionDuration:"1s"
     },
     Icon: {
         height: "1rem",
