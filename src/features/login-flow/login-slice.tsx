@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import loggedInUserInitialState from "./login-initial-state";
 
 export const loggedInUser = createSlice({
@@ -8,7 +8,8 @@ export const loggedInUser = createSlice({
     loginStart: startLoading,
     loginSuccess: loadingSuccess,
     loginFailure: loadingFailed,
-    resetLoginState: resetLoginState,
+    logout: resetLoginState,
+    login,
   },
 });
 
@@ -28,8 +29,13 @@ function loadingSuccess(state: any, action: any) {
   state.error = null;
 }
 
-function resetLoginState(state: any, action: any) {
-  state.loggedInUser = loggedInUserInitialState.loggedInUser;
-  state.isLoading = false;
+function resetLoginState(state: any) {
+  console.log("reset");
+  state = { ...loggedInUserInitialState };
   state.error = null;
+  return state;
+}
+
+function login(state: any, action: any) {
+  startLoading(state);
 }

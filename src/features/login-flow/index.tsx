@@ -1,11 +1,13 @@
 import { loggedInUser } from "./login-slice";
+import LoginSaga from './login-sagas'
 export const {
   loginStart,
   loginSuccess,
   loginFailure,
-  resetLoginState,
+  logout,
+  login,
 } = loggedInUser.actions;
 
 export default loggedInUser.reducer;
 
-export { authenticate } from "./login-thunks";
+export {LoginSaga};
