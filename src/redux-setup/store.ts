@@ -1,14 +1,21 @@
-import {createStore,applyMiddleware} from '@reduxjs/toolkit';
-import {routerMiddleware} from 'connected-react-router';
-import rootReducer from './rootReducer'
-import history from './history';
+import {
+  //createStore,
+  //applyMiddleware,
+  configureStore,
+  getDefaultMiddleware,
+} from "@reduxjs/toolkit";
+import { routerMiddleware } from "connected-react-router";
+import rootReducer from "./rootReducer";
+import history from "./history";
 //import {createLogger} from 'redux-logger';
-import tokenMiddleware from '../redux-middlewares-enhancers/token-middleware'
-import Logger from '../components/Logger'
-import {persistReducer, persistStore} from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
-import createSagaMiddleware from 'redux-saga';
-import LoginSaga from '../features/login-flow/login-sagas';
+import tokenMiddleware from "../redux-middlewares-enhancers/token-middleware";
+import Logger from "../components/Logger";
+import { persistReducer, persistStore } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+// import createSagaMiddleware from "redux-saga";
+// import LoginSaga from "../features/login-flow/login-sagas";
+// import { composeWithDevTools } from "redux-devtools-extension";
+
 // const Tlogger=createLogger({
 //     predicate:(getState ,action)=>
 //     {
@@ -50,20 +57,41 @@ import LoginSaga from '../features/login-flow/login-sagas';
 //         log:console.log,
 //         info:console.info
 //     }
-// }) 
-const sagaMiddleware  = createSagaMiddleware();
-const LoggerMiddlwareCustom=()=>(next: any)=>(action: any)=>{
-    Logger.log({LogType:"ReduxAction",logData:action})
-    next(action);
-}
-const persistConfig={
-    key:'root',
-    storage
-}
-const store=createStore(
-    persistReducer(persistConfig,rootReducer),
-    applyMiddleware(sagaMiddleware,routerMiddleware(history), tokenMiddleware ,LoggerMiddlwareCustom)
-)
-sagaMiddleware.run(LoginSaga);
-const storeConfig={store,persistor:persistStore(store)}
+// })
+//const composeEnhancers = composeWithDevTools({
+// Specify here name, actionsBlacklist, actionsCreators and other options
+//});
+//const sagaMiddleware = createSagaMiddleware();
+const LoggerMiddlwareCustom = () => (next: any) => (action: any) => {
+  Logger.log({ LogType: "ReduxAction", logData: action });
+  next(action);
+};
+const persistConfig = {
+  key: "root",
+  storage,
+};
+const store = configureStore({
+  reducer: persistReducer(persistConfig, rootReducer),
+  middleware: [
+    // Because we define the middleware property here, we need to explictly add the defaults back in.
+    ...getDefaultMiddleware(),
+    //sagaMiddleware,
+    routerMiddleware(history),
+    tokenMiddleware,
+    LoggerMiddlwareCustom,
+  ],
+});
+// const mystore = createStore(
+//   persistReducer(persistConfig, rootReducer),
+//   composeEnhancers(
+//     applyMiddleware(
+//       sagaMiddleware,
+//       routerMiddleware(history)
+//       //tokenMiddleware,
+//       //LoggerMiddlwareCustom
+//     )
+//   )
+// );
+//sagaMiddleware.run(LoginSaga);
+const storeConfig = { store, persistor: persistStore(store) };
 export default storeConfig;
