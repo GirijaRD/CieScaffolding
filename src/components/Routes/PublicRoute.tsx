@@ -6,18 +6,14 @@ const PublicRoute: React.FunctionComponent<any> = ({
   ...rest
 }) => {
   const { token } = rest;
-  console.log("login",rest)
-  const redirectPath=!token?"/login":"/consumer";
+  console.log("login", rest);
+  const redirectPath = !token ? "/login" : "/consumer";
   return (
     <Route
       {...rest}
-      component={(props: any): ReactElement => (!token  ? (
-        <Component
-          {...props}
-        />
-      ) : (
-        <Redirect to={redirectPath} />
-      ))}
+      component={(props: any): ReactElement =>
+        !token ? <Component {...props} /> : <Redirect to={redirectPath} />
+      }
     />
   );
 };
@@ -26,4 +22,6 @@ function mapStateToProps({ login }: any) {
     token: login.loggedInUser.token,
   };
 }
-export default connect(mapStateToProps,null,null,{pure:false})(PublicRoute);
+export default connect(mapStateToProps, null, null, { pure: false })(
+  PublicRoute
+);

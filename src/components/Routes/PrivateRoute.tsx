@@ -13,12 +13,12 @@ const PrivateRoute: React.FunctionComponent<any> = ({
       render={(props) => {
         const combinedProps = { ...props, ...rest };
         return token ? (
-          <Component {...combinedProps}></Component>
+          <Component {...combinedProps} />
         ) : (
           <Redirect to="/login" />
         );
       }}
-    ></Route>
+    />
   );
 };
 function mapStateToProps({ login }: any) {
@@ -26,4 +26,6 @@ function mapStateToProps({ login }: any) {
     token: login.loggedInUser.token,
   };
 }
-export default connect(mapStateToProps,null,null,{pure:false})(PrivateRoute);
+export default connect(mapStateToProps, null, null, { pure: false })(
+  PrivateRoute
+);
