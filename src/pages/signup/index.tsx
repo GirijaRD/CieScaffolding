@@ -1,5 +1,4 @@
 import React, { ReactElement } from "react";
-import { connect } from "react-redux";
 import SignUpFormComponent from "../../components/SignUpFormComponent/Index";
 import AuthWrapper from "components/AuthWrapper";
 
@@ -14,4 +13,4 @@ function SignUp(props: Props): ReactElement {
     </AuthWrapper>
   );
 }
-export default connect()(SignUp);
+export default SignUp;
