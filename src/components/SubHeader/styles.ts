@@ -14,11 +14,15 @@ Title:{
 subHeaderContainer:{
   flexWrap:"wrap",
   justifyContent:"space-between",
-  alignItems:"center"
+  alignItems:"center",
+  margin:"2px 4px 10px 4px"
 },
 AudienceStyles:{
   flexWrap:"nowrap",
   height:"2.5rem",
+  zIndex:10,
+  cursor:"pointer",
+  marginTop:"5px",
   "@media(max-width:600px)":{
     marginLeft:"10px"
   },

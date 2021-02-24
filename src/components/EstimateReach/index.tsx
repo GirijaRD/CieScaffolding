@@ -83,8 +83,7 @@ function EstimatedReach(props:propType):ReactElement {
     const data=props.Audience;
     return (
       <Paper
-        classes={{ root: transition ? styles.paper:styles.paperCollapsed}}
-        
+        classes={{ root: transition?styles.paper:styles.paperCollapsed}}
         onClick={() => toggle(!transition)}
       >
         <Collapse

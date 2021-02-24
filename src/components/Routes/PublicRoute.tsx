@@ -7,10 +7,7 @@ const PublicRoute: React.FunctionComponent<any> = ({
   component: Component,
   ...rest
 }) => {
-  //const { token } = rest;
-  //console.log("login", rest);
   const usertoken = useSelector((state: any) => state.login.loggedInUser.token);
-
   const redirectPath = !usertoken ? "/login" : "/consumer";
   return (
     <Route

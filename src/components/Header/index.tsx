@@ -16,17 +16,17 @@ import {
 import { logout } from "../../slices/LoginSlice";
 import { connect, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { makeStyles, Theme, withStyles } from "@material-ui/core/styles";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
 import MenuItem from "@material-ui/core/MenuItem";
-import ConsumerInsightIcon from "../../icons/ConsumerInsightIcon";
-import CompetitorsInsightsIcon from "../../icons/competitors-insights-icon";
-import AudienceIcon from "../../icons/audience-icon";
-import UsernameIcon from "../../icons/username-icon";
-import LogoutIcon from "../../icons/logout-icon";
-import HelpIcon from "../../icons/help-icon";
-import AdminIcon from "../../icons/admin-icon";
+import ConsumerInsightIcon from "../../icons/HeaderIcons/ConsumerInsightIcon";
+import CompetitorsInsightsIcon from "../../icons/HeaderIcons/competitors-insights-icon";
+import AudienceIcon from "../../icons/HeaderIcons/audience-icon";
+import UsernameIcon from "../../icons/HeaderIcons/username-icon";
+import LogoutIcon from "../../icons/HeaderIcons/logout-icon";
+import HelpIcon from "../../icons/HeaderIcons/help-icon";
+import AdminIcon from "../../icons/HeaderIcons/admin-icon";
 import { Icon } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 interface HeaderProps {
@@ -180,7 +180,7 @@ HeaderProps): ReactElement => {
                   horizontal: "left",
                 }}
               >
-                <MenuItem onClick={handleClose} divider>
+                <MenuItem onClick={navigate.bind(null, "admin")} divider>
                   <AdminIcon
                     style={{
                       width: "19px",
@@ -201,7 +201,7 @@ HeaderProps): ReactElement => {
 
                   <HeaderDropdownOptions>Help</HeaderDropdownOptions>
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={Logout}>
                   <LogoutIcon
                     style={{
                       width: "19px",
