@@ -9,7 +9,7 @@ export const loggedInUser = createSlice({
     loginSuccess: loadingSuccess,
     loginFailure: loadingFailed,
     logout: resetLoginState,
-    login
+    login,
   },
 });
 
@@ -30,11 +30,12 @@ function loadingSuccess(state: any, action: any) {
 }
 
 function resetLoginState(state: any) {
-  console.log("reset")
-  state={...loggedInUserInitialState}
+  console.log("reset");
+  state = { ...loggedInUserInitialState };
   state.error = null;
   return state;
 }
-function login(state:any,action:any){
+
+function login(state: any, action: any) {
   startLoading(state);
 }

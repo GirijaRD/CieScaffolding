@@ -13,25 +13,25 @@ import {
   HeaderNavGrid,
   HeaderDropdownOptions,
 } from "./styles";
-import { logout } from "../../features/login-flow";
-import { connect } from "react-redux";
+import { logout } from "../../slices/LoginSlice";
+import { connect, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { makeStyles, Theme, withStyles } from "@material-ui/core/styles";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
 import MenuItem from "@material-ui/core/MenuItem";
-import ConsumerInsightIcon from "../../icons/ConsumerInsightIcon";
-import CompetitorsInsightsIcon from "../../icons/competitors-insights-icon";
-import AudienceIcon from "../../icons/audience-icon";
-import UsernameIcon from "../../icons/username-icon";
-import LogoutIcon from "../../icons/logout-icon";
-import HelpIcon from "../../icons/help-icon";
-import AdminIcon from "../../icons/admin-icon";
+import ConsumerInsightIcon from "../../icons/HeaderIcons/ConsumerInsightIcon";
+import CompetitorsInsightsIcon from "../../icons/HeaderIcons/competitors-insights-icon";
+import AudienceIcon from "../../icons/HeaderIcons/audience-icon";
+import UsernameIcon from "../../icons/HeaderIcons/username-icon";
+import LogoutIcon from "../../icons/HeaderIcons/logout-icon";
+import HelpIcon from "../../icons/HeaderIcons/help-icon";
+import AdminIcon from "../../icons/HeaderIcons/admin-icon";
 import { Icon } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 interface HeaderProps {
   path: string;
-  Logout: () => any;
+  // Logout: () => any;
 }
 
 function mapStateToProps({ router: { location } }: any) {
@@ -73,12 +73,19 @@ export const useStyles = makeStyles((theme: Theme) => ({
 
 const Header: React.FunctionComponent<HeaderProps> = ({
   path,
-  Logout,
-}: HeaderProps): ReactElement => {
+}: //Logout,
+HeaderProps): ReactElement => {
   const history = useHistory();
   function navigate(location: string) {
     if ("/" + location !== path) history.push(location);
   }
+  const dispatch = useDispatch();
+
+  const handleLogOut = () => {
+    console.log("WHOAMI", logout);
+    dispatch(logout());
+  };
+
   const location = useLocation();
   console.log("Current locations is:" + JSON.stringify(location));
   const classes = useStyles();
@@ -92,6 +99,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   return (
     <CieHeader position="static">
       <MainHeaderGrid item lg={12} md={12}>
@@ -172,7 +180,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
                   horizontal: "left",
                 }}
               >
-                <MenuItem onClick={handleClose} divider>
+                <MenuItem onClick={navigate.bind(null, "admin")} divider>
                   <AdminIcon
                     style={{
                       width: "19px",
@@ -193,7 +201,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
 
                   <HeaderDropdownOptions>Help</HeaderDropdownOptions>
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={Logout}>
                   <LogoutIcon
                     style={{
                       width: "19px",
@@ -201,7 +209,10 @@ const Header: React.FunctionComponent<HeaderProps> = ({
                     }}
                   />
 
-                  <HeaderDropdownOptions style={{ color: "red" }}>
+                  <HeaderDropdownOptions
+                    style={{ color: "red" }}
+                    onClick={handleLogOut}
+                  >
                     Logout
                   </HeaderDropdownOptions>
                 </MenuItem>
@@ -213,11 +224,11 @@ const Header: React.FunctionComponent<HeaderProps> = ({
     </CieHeader>
   );
 };
-function mapDispatchToProps(dispatch: any) {
-  return {
-    Logout: () => {
-      dispatch(logout());
-    },
-  };
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+// function mapDispatchToProps(dispatch: any) {
+//   return {
+//     Logout: () => {
+//       dispatch(logout());
+//     },
+//   };
+// }
+export default connect(mapStateToProps)(Header);
