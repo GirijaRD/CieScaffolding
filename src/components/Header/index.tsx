@@ -201,7 +201,7 @@ HeaderProps): ReactElement => {
 
                   <HeaderDropdownOptions>Help</HeaderDropdownOptions>
                 </MenuItem>
-                <MenuItem onClick={Logout}>
+                <MenuItem onClick={handleLogOut}>
                   <LogoutIcon
                     style={{
                       width: "19px",
@@ -209,10 +209,7 @@ HeaderProps): ReactElement => {
                     }}
                   />
 
-                  <HeaderDropdownOptions
-                    style={{ color: "red" }}
-                    onClick={handleLogOut}
-                  >
+                  <HeaderDropdownOptions style={{ color: "red" }}>
                     Logout
                   </HeaderDropdownOptions>
                 </MenuItem>
